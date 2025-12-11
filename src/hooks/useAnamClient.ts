@@ -44,16 +44,11 @@ export const useAnamClient = (): AnamClientHook => {
     );
 
     if (!response.ok) {
-      const errorData = await response.json().catch(() => ({ error: 'Unknown error' }));
-      console.error('Token fetch error:', errorData);
-      throw new Error(errorData.error || `Failed to get session token (${response.status})`);
+      const errorData = await response.json();
+      throw new Error(errorData.error || 'Failed to get session token');
     }
 
     const data = await response.json();
-    if (!data.sessionToken) {
-      console.error('No session token in response:', data);
-      throw new Error('No session token received from server');
-    }
     return data.sessionToken;
   };
 
@@ -62,14 +57,10 @@ export const useAnamClient = (): AnamClientHook => {
       setIsLoading(true);
       setError(null);
 
-      console.log('Getting session token...');
       const sessionToken = await getSessionToken(personaConfig);
-      console.log('Session token received, creating client...');
 
       const client = createClient(sessionToken);
-      console.log('Client created, streaming to video element...');
       await client.streamToVideoElement(videoElementId);
-      console.log('Stream started successfully');
 
       clientRef.current = client;
       setIsConnected(true);
@@ -77,7 +68,6 @@ export const useAnamClient = (): AnamClientHook => {
       const errorMessage = err instanceof Error ? err.message : 'Failed to connect to Anam';
       setError(errorMessage);
       console.error('Anam connection error:', err);
-      throw err;
     } finally {
       setIsLoading(false);
     }

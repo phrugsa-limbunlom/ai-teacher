@@ -34,7 +34,7 @@ Deno.serve(async (req: Request) => {
 
     const defaultPersonaConfig = {
       name: personaConfig?.name || "Alex",
-      avatarId: personaConfig?.avatarId || "becd964e-6666-439c-8968-86dce7275571",
+      avatarId: personaConfig?.avatarId || "30fa96d0-26c4-4e55-94a0-517025942e18",
       voiceId: personaConfig?.voiceId || "6bfbe25a-979d-40f3-a92b-5394170af54b",
       llmId: personaConfig?.llmId || "0934d97d-0c3a-4f33-91b0-5e136a0ef466",
       systemPrompt: personaConfig?.systemPrompt || "You are a helpful and friendly AI assistant. You have vision capabilities and can analyze images. Provide clear, concise, and helpful responses to user questions.",
