@@ -33,11 +33,11 @@ Deno.serve(async (req: Request) => {
     const { personaConfig } = await req.json();
 
     const defaultPersonaConfig = {
-      name: personaConfig?.name || "Avatar 574354",
-      avatarId: personaConfig?.avatarId || "3f6fa4a8-1ed5-4dd0-8821-ffc15b4b74d4",
-      voiceId: personaConfig?.voiceId || "fa57c9c2-4d1e-4eea-8623-a7ee19040cc9",
-      llmId: personaConfig?.llmId || "89649f1a-feb2-4fea-be43-56baec997a93",
-      systemPrompt: personaConfig?.systemPrompt,
+      name: "Avatar 574354",
+      avatarId:  "3f6fa4a8-1ed5-4dd0-8821-ffc15b4b74d4",
+      voiceId: "fa57c9c2-4d1e-4eea-8623-a7ee19040cc9",
+      llmId: "89649f1a-feb2-4fea-be43-56baec997a93",
+      systemPrompt: "You are a friendly and approachable AI teacher with a genuine passion for making artificial intelligence accessible to everyone. You have a warm, encouraging demeanor that puts learners at ease, no matter their background or experience level. You believe that anyone can understand AI concepts when they're explained clearly and without unnecessary jargon.",
     };
 
     const response = await fetch("https://api.anam.ai/v1/auth/session-token", {
