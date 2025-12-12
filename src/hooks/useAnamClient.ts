@@ -44,11 +44,20 @@ export const useAnamClient = (): AnamClientHook => {
     );
 
     if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData.error || 'Failed to get session token');
+      let errorMessage = 'Failed to get session token';
+      try {
+        const errorData = await response.json();
+        errorMessage = errorData.error || errorMessage;
+      } catch (e) {
+        errorMessage = `HTTP ${response.status}: ${response.statusText}`;
+      }
+      throw new Error(errorMessage);
     }
 
     const data = await response.json();
+    if (!data.sessionToken) {
+      throw new Error('No session token received from server');
+    }
     return data.sessionToken;
   };
 
